@@ -4,6 +4,30 @@
 
 namespace{
     QPushButton* buttons[8][8];
+    QIcon intToIcon(int a){
+        switch(a){
+        case -1:
+            return QIcon("../images/bomb.png");
+        case 0:
+            return QIcon("../images/empty.png");
+        case 1:
+            return QIcon("../images/1.png");
+        case 2:
+            return QIcon("../images/2.png");
+        case 3:
+            return QIcon("../images/3.png");
+        case 4:
+            return QIcon("../images/4.png");
+        case 5:
+            return QIcon("../images/5.png");
+        case 6:
+            return QIcon("../images/6.png");
+        case 7:
+            return QIcon("../images/7.png");
+        case 8:
+            return QIcon("../images/8.png");
+        }
+    }
 void setupButtons(Ui::MainWindow *ui){
     buttons[0][0] = ui->button00;
     buttons[0][1] = ui->button01;
@@ -83,13 +107,14 @@ void setupButtons(Ui::MainWindow *ui){
  */
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow), board(new Board())
 {
+
     ui->setupUi(this);
     setupButtons(ui);
     for(int i = 0 ; i < 8 ; ++i)
         for(int j = 0 ; j < 8 ; ++j){
-            buttons[i][j]->setIcon(QIcon("../images/hidden.png"));
+            buttons[i][j]->setIcon(intToIcon(board->getValue(i,j)));//temp
             buttons[i][j]->setIconSize(QSize(68,68));
             connect(buttons[i][j],SIGNAL(clicked()),this,SLOT(buttonClick()));
             buttons[i][j]->setText("");
@@ -99,6 +124,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    delete board;
     delete ui;
 }
 void MainWindow::buttonClick(){
