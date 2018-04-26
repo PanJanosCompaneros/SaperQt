@@ -21,6 +21,8 @@ private slots:
 private:
     Board * board;
     Ui::MainWindow *ui;
+    //metoda void updateValues();
+    //metoda void updateIcons();
 };
 
 #endif // MAINWINDOW_H
