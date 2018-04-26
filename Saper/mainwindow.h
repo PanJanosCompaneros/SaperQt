@@ -19,8 +19,8 @@ private slots:
     void on_button01_clicked();
     void buttonClick();
 private:
-    Board * board;
     Ui::MainWindow *ui;
+    Board * board;
     //metoda void updateValues();
     //metoda void updateIcons();
 };

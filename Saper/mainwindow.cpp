@@ -26,6 +26,8 @@ namespace{
             return QIcon("../images/7.png");
         case 8:
             return QIcon("../images/8.png");
+        default:
+            return QIcon("../images/empty.png");
         }
     }
 void setupButtons(Ui::MainWindow *ui){
@@ -114,7 +116,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setupButtons(ui);
     for(int i = 0 ; i < 8 ; ++i)
         for(int j = 0 ; j < 8 ; ++j){
-            buttons[i][j]->setIcon(intToIcon(board->getValue(i,j)));//temp
+            buttons[i][j]->setIcon(intToIcon(board->getElement(i,j).value));//temp   TODOTODOTODOTODO tu ma byc getElement(i,j).value
             buttons[i][j]->setIconSize(QSize(68,68));
             connect(buttons[i][j],SIGNAL(clicked()),this,SLOT(buttonClick()));
             buttons[i][j]->setText("");
