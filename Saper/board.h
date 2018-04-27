@@ -7,14 +7,16 @@ class Board
 
 public:
     Board();
-    bool alive;
     ~Board();
+    bool isAlive();
     //metoda hideButtons();  // zeby zaciemnic na poczatku
     //metoda isVisible();    // zeby sprawdzic, czy dany klocek jest wciaz zaciemniony (wciaz nieodkryty)
     Element getElement(int, int);
     void exposeElement(int, int);//
     // int howMuchLeft();
 private:
+    bool alive;
+
     void exposeEmptyFields(int, int);
     //int fieldsToBeExposed;
     Element elements[8][8];

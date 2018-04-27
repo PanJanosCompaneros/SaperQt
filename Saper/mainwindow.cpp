@@ -6,8 +6,10 @@ namespace{
     QPushButton* buttons[8][8];
     QIcon intToIcon(int a){
         switch(a){
-        case -1:
+        case -2:
             return QIcon("../images/bomb.png");
+        case -1:
+            return QIcon("../images/bomb bad.png");
         case 0:
             return QIcon("../images/empty.png");
         case 1:
@@ -26,6 +28,8 @@ namespace{
             return QIcon("../images/7.png");
         case 8:
             return QIcon("../images/8.png");
+        case 9:
+            return QIcon("../images/hidden.png");
         default:
             return QIcon("../images/empty.png");
         }
@@ -116,7 +120,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setupButtons(ui);
     for(int i = 0 ; i < 8 ; ++i)
         for(int j = 0 ; j < 8 ; ++j){
-            buttons[i][j]->setIcon(intToIcon(board->getElement(i,j).value));//temp   TODOTODOTODOTODO tu ma byc getElement(i,j).value
+            buttons[i][j]->setIcon(intToIcon(board->getElement(i,j).value));
             buttons[i][j]->setIconSize(QSize(68,68));
             connect(buttons[i][j],SIGNAL(clicked()),this,SLOT(buttonClick()));
             buttons[i][j]->setText("");
@@ -148,17 +152,17 @@ void MainWindow::updateIcons() //
 {
     for (int i = 0 ; i < 8 ; ++i)
         for (int j = 0 ; j < 8 ; ++j){
-            if (board->getElement(i,j).visible == false) buttons[i][j]->setIcon(QIcon("../images/hidden.png"));
-            else if (board->getElement(i,j).value == -1) buttons[i][j]->setIcon(QIcon("../images/bomb.png"));
-            else if (board->getElement(i,j).value == 1) buttons[i][j]->setIcon(QIcon("../images/1.png"));
-            else if (board->getElement(i,j).value == 2) buttons[i][j]->setIcon(QIcon("../images/2.png"));
-            else if (board->getElement(i,j).value == 3) buttons[i][j]->setIcon(QIcon("../images/3.png"));
-            else if (board->getElement(i,j).value == 4) buttons[i][j]->setIcon(QIcon("../images/4.png"));
-            else if (board->getElement(i,j).value == 5) buttons[i][j]->setIcon(QIcon("../images/5.png"));
-            else if (board->getElement(i,j).value == 6) buttons[i][j]->setIcon(QIcon("../images/6.png"));
-            else if (board->getElement(i,j).value == 7) buttons[i][j]->setIcon(QIcon("../images/7.png"));
-            else if (board->getElement(i,j).value == 8) buttons[i][j]->setIcon(QIcon("../images/8.png"));
-            else  buttons[i][j]->setIcon(QIcon("../images/empty.png"));
+            if (board->getElement(i,j).visible == false) buttons[i][j]->setIcon(intToIcon(9));
+            else if (board->getElement(i,j).value == -1) buttons[i][j]->setIcon(intToIcon(-1));
+            else if (board->getElement(i,j).value == 1) buttons[i][j]->setIcon(intToIcon(1));
+            else if (board->getElement(i,j).value == 2) buttons[i][j]->setIcon(intToIcon(2));
+            else if (board->getElement(i,j).value == 3) buttons[i][j]->setIcon(intToIcon(3));
+            else if (board->getElement(i,j).value == 4) buttons[i][j]->setIcon(intToIcon(4));
+            else if (board->getElement(i,j).value == 5) buttons[i][j]->setIcon(intToIcon(5));
+            else if (board->getElement(i,j).value == 6) buttons[i][j]->setIcon(intToIcon(6));
+            else if (board->getElement(i,j).value == 7) buttons[i][j]->setIcon(intToIcon(7));
+            else if (board->getElement(i,j).value == 8) buttons[i][j]->setIcon(intToIcon(8));
+            else  buttons[i][j]->setIcon(intToIcon(0));
             buttons[i][j]->setIconSize(QSize(68,68));
         }
 }

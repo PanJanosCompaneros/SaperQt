@@ -20,6 +20,11 @@ Board::~Board()
 
 }
 
+bool Board::isAlive()
+{
+    return this->alive;
+}
+
 Element Board::getElement(int a, int b)
 {
     return this->elements[a][b];
@@ -28,7 +33,7 @@ Element Board::getElement(int a, int b)
 void Board::exposeElement(int a, int b) //
 {
     if (this->elements[a][b].visible == true) return;
-    if (this->elements[a][b].value == -1) this->alive = false;
+    if (this->elements[a][b].value == -1) this->alive = false; // zamiast tego dac if(...) this->gameOver();
     if (this->elements[a][b].value == 0) exposeEmptyFields(a,b);//+
     this->elements[a][b].visible = true;
 }
