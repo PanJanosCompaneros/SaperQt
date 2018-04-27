@@ -121,7 +121,7 @@ MainWindow::MainWindow(QWidget *parent) :
             connect(buttons[i][j],SIGNAL(clicked()),this,SLOT(buttonClick()));
             buttons[i][j]->setText("");
         }
-
+    updateIcons();//+
 }
 
 MainWindow::~MainWindow()
@@ -134,10 +134,32 @@ void MainWindow::buttonClick(){
     for(int i = 0; i < 8 ; ++i)
         for(int j = 0 ; j < 8 ; ++j){
             if(buttons[i][j] == button){
-                buttons[i][j]->setIcon(QIcon("../images/bomb.png"));
-                buttons[i][j]->setIconSize(QSize(68,68));
-
+//                buttons[i][j]->setIcon(QIcon("../images/bomb.png"));
+//                buttons[i][j]->setIconSize(QSize(68,68));
+                board->exposeElement(i,j);
+                updateIcons();//+ nie dziala. nie odkrywa w ogole niczego// hehe. nie ma odpalonej metody exposeButton() czy cos ;)
             }
+        }
+}
+
+
+
+void MainWindow::updateIcons() //
+{
+    for (int i = 0 ; i < 8 ; ++i)
+        for (int j = 0 ; j < 8 ; ++j){
+            if (board->getElement(i,j).visible == false) buttons[i][j]->setIcon(QIcon("../images/hidden.png"));
+            else if (board->getElement(i,j).value == -1) buttons[i][j]->setIcon(QIcon("../images/bomb.png"));
+            else if (board->getElement(i,j).value == 1) buttons[i][j]->setIcon(QIcon("../images/1.png"));
+            else if (board->getElement(i,j).value == 2) buttons[i][j]->setIcon(QIcon("../images/2.png"));
+            else if (board->getElement(i,j).value == 3) buttons[i][j]->setIcon(QIcon("../images/3.png"));
+            else if (board->getElement(i,j).value == 4) buttons[i][j]->setIcon(QIcon("../images/4.png"));
+            else if (board->getElement(i,j).value == 5) buttons[i][j]->setIcon(QIcon("../images/5.png"));
+            else if (board->getElement(i,j).value == 6) buttons[i][j]->setIcon(QIcon("../images/6.png"));
+            else if (board->getElement(i,j).value == 7) buttons[i][j]->setIcon(QIcon("../images/7.png"));
+            else if (board->getElement(i,j).value == 8) buttons[i][j]->setIcon(QIcon("../images/8.png"));
+            else  buttons[i][j]->setIcon(QIcon("../images/empty.png"));
+            buttons[i][j]->setIconSize(QSize(68,68));
         }
 }
 
