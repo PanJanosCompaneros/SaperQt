@@ -54,16 +54,30 @@ void Board::exposeEmptyFields(int x, int y)//
     if (this->elements[x][y].value != 0) return;
     if (this->elements[x][y].value ==0)
         this->elements[x][y].visible = true;
-    //dla kazdego sasiada, ktory ISTNIEJE, jest NIEODKRYTY i ma wartosc ZERO, odkrywamy go i odpalamy dla niego te funkcje
-    // teraz dla kazdego jego sasiada (N,NW,NE,S,SW,SE,E,W) jesli sasiad istnieje i ma value==0, odpal te metode
-//    if(x-1 >= 0 && y-1 >= 0 && this->elements[x-1][y-1].value == 0 && this->elements[x-1][y-1].visible == false) {this->elements[x-1][y-1].visible = true; this->exposeEmptyFields(x-1,y-1);} ; // N W
-//    if(x-1 >= 0 && y+1 < this->length && elements[x-1][y+1].value == 0 && this->elements[x-1][y+1].visible == false) {this->elements[x-1][y+1].visible=true; this->exposeEmptyFields(x-1,y+1);} // N E
-    if(x-1 > 0 && this->elements[x-1][y].value == 0 && this->elements[x-1][y].visible==false) {this->elements[x-1][y].visible=true; this->exposeEmptyFields(x-1,y);} // N
-//    if(x+1 < this->length && y-1 >= 0 && elements[x+1][y-1].value == 0 && this->elements[x+1][y-1].visible==false){this->elements[x+1][y-1].visible=true; this->exposeEmptyFields(x+1,y-1);}  // S W
-//    if(x+1 < this->length  && y+1 < this->length && this->elements[x+1][y+1].value == 0 && this->elements[x+1][y+1].visible==false) {this->elements[x+1][y+1].visible=true; this->exposeEmptyFields(x+1,y+1);}// S E
-    if(x+1 >= 0 && this->elements[x+1][y].value== 0 && this->elements[x+1][y].visible==false) {this->elements[x+1][y].visible=true; this->exposeEmptyFields(x+1,y);} // S
-    if(y-1 >= 0 && this->elements[x][y-1].value == 0 && this->elements[x][y-1].visible==false){this->elements[x][y-1].visible=true; this->exposeEmptyFields(x,y-1);}  //W
-    if(y+1 < this->length && this->elements[x][y+1].value == 0 && this->elements[x][y+1].visible==false) {this->elements[x][y+1].visible=true; this->exposeEmptyFields(x,y+1);} //E
+
+    if(x-1 >= 0  && this->elements[x-1][y].visible==false) {
+        this->elements[x-1][y].visible=true;
+        if(this->elements[x-1][y].value == 0)
+        this->exposeEmptyFields(x-1,y);
+    } // N
+
+    if(x+1 < this->length && this->elements[x+1][y].visible==false) {
+        this->elements[x+1][y].visible=true;
+        if(this->elements[x+1][y].value== 0)
+        this->exposeEmptyFields(x+1,y);
+    } // S
+
+    if(y-1 >= 0 &&  this->elements[x][y-1].visible==false){
+        this->elements[x][y-1].visible=true;
+        if(this->elements[x][y-1].value == 0)
+        this->exposeEmptyFields(x,y-1);
+    }  //W
+
+     if(y+1 < this->length &&  this->elements[x][y+1].visible==false) {
+         this->elements[x][y+1].visible=true;
+         if(this->elements[x][y+1].value == 0)
+         this->exposeEmptyFields(x,y+1);
+     } //E
 }
 
 
