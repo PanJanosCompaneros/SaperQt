@@ -39,6 +39,13 @@ void Board::exposeElement(int a, int b) //
     }
     if (this->elements[a][b].value == 0) exposeEmptyFields(a,b);//+
     this->elements[a][b].visible = true;
+    this->fieldsToBeExposed--;
+//    if(this->fieldsToBeExposed ==0) youwinthegameeeeeeeeeeeeeeee
+}
+
+int Board::howMuchLeft()
+{
+    return this->fieldsToBeExposed;
 }
 
 void Board::gameOver() //+
@@ -78,6 +85,17 @@ void Board::exposeEmptyFields(int x, int y)//
          if(this->elements[x][y+1].value == 0)
          this->exposeEmptyFields(x,y+1);
      } //E
+}
+
+int Board::countHowManyFieldsAreToBeExposed()// +
+{
+    int result = 64;  // there are 64 fields on the board
+
+    for (int i = 0 ; i < 8 ; ++i)
+        for (int j = 0 ; j < 8 ; ++j){
+            if (this->elements[i][j].value == 0) --result;
+        }
+    return result;
 }
 
 

@@ -13,13 +13,15 @@ public:
     //metoda isVisible();    // zeby sprawdzic, czy dany klocek jest wciaz zaciemniony (wciaz nieodkryty)
     Element getElement(int, int);
     void exposeElement(int, int);//
-    // int howMuchLeft();
-    void gameOver();
+    int howMuchLeft();
+
 private:
+    void gameOver();
     bool alive;
 
     void exposeEmptyFields(int, int);
-    //int fieldsToBeExposed;
+    int countHowManyFieldsAreToBeExposed();
+    int fieldsToBeExposed;
     Element elements[8][8];
     int length, width;
     int number; // empty -> number=0; bomb->number=-1;
