@@ -7,9 +7,9 @@ namespace{
     QIcon intToIcon(int a){
         switch(a){
         case -2:
-            return QIcon("../images/bomb.png");
-        case -1:
             return QIcon("../images/bomb bad.png");
+        case -1:
+            return QIcon("../images/bomb.png");
         case 0:
             return QIcon("../images/empty.png");
         case 1:
@@ -135,6 +135,10 @@ MainWindow::~MainWindow()
 }
 void MainWindow::buttonClick(){
     void * button = sender();
+    if(!board->isAlive()) {
+        updateIcons();
+        return;
+    }
     for(int i = 0; i < 8 ; ++i)
         for(int j = 0 ; j < 8 ; ++j){
             if(buttons[i][j] == button){
@@ -153,6 +157,7 @@ void MainWindow::updateIcons() //
     for (int i = 0 ; i < 8 ; ++i)
         for (int j = 0 ; j < 8 ; ++j){
             if (board->getElement(i,j).visible == false) buttons[i][j]->setIcon(intToIcon(9));
+            else if (board->getElement(i,j).value == -2) buttons[i][j]->setIcon(intToIcon(-2));
             else if (board->getElement(i,j).value == -1) buttons[i][j]->setIcon(intToIcon(-1));
             else if (board->getElement(i,j).value == 1) buttons[i][j]->setIcon(intToIcon(1));
             else if (board->getElement(i,j).value == 2) buttons[i][j]->setIcon(intToIcon(2));

@@ -14,6 +14,7 @@ public:
     Element getElement(int, int);
     void exposeElement(int, int);//
     // int howMuchLeft();
+    void gameOver();
 private:
     bool alive;
 

@@ -33,9 +33,20 @@ Element Board::getElement(int a, int b)
 void Board::exposeElement(int a, int b) //
 {
     if (this->elements[a][b].visible == true) return;
-    if (this->elements[a][b].value == -1) this->alive = false; // zamiast tego dac if(...) this->gameOver();
+    if (this->elements[a][b].value == -1) {
+        this->elements[a][b].value = -2;
+        this->gameOver();
+    }
     if (this->elements[a][b].value == 0) exposeEmptyFields(a,b);//+
     this->elements[a][b].visible = true;
+}
+
+void Board::gameOver() //+
+{
+    this->alive = false;
+    for (int i = 0 ; i < 8 ; ++i)
+        for (int j = 0 ; j < 8 ; ++j)
+            this->elements[i][j].visible=true;
 }
 
 void Board::exposeEmptyFields(int x, int y)//
